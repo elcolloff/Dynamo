@@ -81,6 +81,11 @@ namespace Dynamo.Utilities
 			return true;
 		}
 
+        /// <summary>
+        /// Indicates whether this rectangle overlaps with the specified rectangle.
+        /// </summary>
+        /// <param name="rect">The rectangle to test for overlap.</param>
+        /// <returns><c>true</c> if the two rectangles share at least one interior point; otherwise, <c>false</c>. Rectangles that only touch along an edge (zero overlap area) are not considered intersecting.</returns>
         public bool IntersectsWith(Rect2D rect)
         {
             return !((Left >= rect.Right) || (Right <= rect.Left) ||
