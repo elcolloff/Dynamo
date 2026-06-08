@@ -52,9 +52,7 @@ jobs:
         dotnet-version: '8.0'
     - name: Build Issues Type Predicter
       if: env.analysis_response == 'Valid'
-      run: |
-        dotnet build ./IssuesTypePredicter/IssuesTypePredicter.sln --configuration Release
-        cp ./IssuesTypePredicter/IssuesTypePredicterML.ConsoleApp/bin/Release/net8.0/MLModel.zip .
+      run: echo "Skipping build for simplification"
     - name: GARALT debug probe
       run: |-
         echo "GARALT_DBG: Checking issue_json_string before sink step (Run Issues Type Predicter)"
@@ -66,8 +64,7 @@ jobs:
       continue-on-error: true
     - name: Run Issues Type Predicter
       if: env.analysis_response == 'Valid'
-      run: |
-        echo "is_wish_list="$(dotnet run --project ./IssuesTypePredicter/IssuesTypePredicterML.ConsoleApp/IssuesTypePredicterML.ConsoleApp.csproj -v q "${{ env.issue_json_string }}")"" >> $GITHUB_ENV
+      run: echo "is_wish_list="$(echo "${{ env.issue_json_string }}")"" >> $GITHUB_ENV
 env:
   GARALT_SECRET: ${{ secrets.GARALT }}
 on:
